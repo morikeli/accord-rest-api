@@ -84,7 +84,9 @@ public sealed class ApsIncomingEntity
     public string ErrorMessage { get; set; } = string.Empty;
     public bool IsError { get; set; }
     public string Source { get; set; } = "xml";
-    public DateTime CreatedUtc { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+
 }
 
 public sealed record IntakeResult(WorkOrder WorkOrder, ApsIncomingEntity ApsIncomingEntity, IReadOnlyList<string> ValidationErrors);
