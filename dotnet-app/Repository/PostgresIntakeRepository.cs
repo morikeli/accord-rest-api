@@ -68,13 +68,13 @@ public sealed class PostgresIntakeRepository
                 patient_date_of_birth, patient_government_id, patient_street, patient_city, patient_state,
                 patient_zip, patient_phone, patient_email, doctor_first_name, doctor_last_name, doctor_facility,
                 doctor_street, doctor_city, doctor_state, doctor_zip, doctor_phone, copy_instructions,
-                policy_amount, error_message, is_error, source, created_utc
+                policy_amount, error_message, is_error, source, created_at, updated_at
             ) VALUES (
                 @tracking_id, @trans_ref_guid, @policy_number, @patient_first_name, @patient_last_name,
                 @patient_date_of_birth, @patient_government_id, @patient_street, @patient_city, @patient_state,
                 @patient_zip, @patient_phone, @patient_email, @doctor_first_name, @doctor_last_name, @doctor_facility,
                 @doctor_street, @doctor_city, @doctor_state, @doctor_zip, @doctor_phone, @copy_instructions,
-                @policy_amount, @error_message, @is_error, @source, @created_utc
+                @policy_amount, @error_message, @is_error, @source, @created_at, @updated_at
             )
             RETURNING id;
             """;
