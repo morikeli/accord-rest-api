@@ -134,7 +134,9 @@ public sealed class AcordXmlIntakeService(PostgresIntakeRepository repository)
         PolicyAmount = workOrder.FaceAmount,
         ErrorMessage = workOrder.ErrorMessage,
         IsError = isError,
-        CreatedUtc = DateTime.UtcNow
+        CreatedAt = DateTime.UtcNow,
+        UpdatedAt = DateTime.UtcNow
+
     };
 
     private static XElement? FindParty(XElement olife, string id) => olife.Elements("Party").FirstOrDefault(p => p.Attribute("id")?.Value == id);
