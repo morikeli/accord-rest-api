@@ -49,7 +49,8 @@ public sealed class PostgresIntakeRepository
                 error_message TEXT NOT NULL,
                 is_error BOOLEAN NOT NULL,
                 source TEXT NOT NULL,
-                created_utc TIMESTAMPTZ NOT NULL
+                created_at TIMESTAMPTZ NOT NULL,
+                updated_at TIMESTAMPTZ NOT NULL
             );
             """;
         command.ExecuteNonQuery();
@@ -135,7 +136,8 @@ public sealed class PostgresIntakeRepository
         command.Parameters.AddWithValue("error_message", entity.ErrorMessage);
         command.Parameters.AddWithValue("is_error", entity.IsError);
         command.Parameters.AddWithValue("source", entity.Source);
-        command.Parameters.AddWithValue("created_utc", entity.CreatedUtc);
+        command.Parameters.AddWithValue("created_at", entity.CreatedAt);
+        command.Parameters.AddWithValue("updated_at", entity.UpdatedAt);
     }
 
     private static ApsIncomingEntity Read(NpgsqlDataReader reader) => new()
@@ -167,6 +169,8 @@ public sealed class PostgresIntakeRepository
         ErrorMessage = reader.GetString(reader.GetOrdinal("error_message")),
         IsError = reader.GetBoolean(reader.GetOrdinal("is_error")),
         Source = reader.GetString(reader.GetOrdinal("source")),
-        CreatedUtc = reader.GetDateTime(reader.GetOrdinal("created_utc"))
+        CreatedAt = reader.GetDateTime(reader.GetOrdinal("created_at")),
+        UpdatedAt = reader.GetDateTime(reader.GetOrdinal("updated_at"))
+
     };
 }
