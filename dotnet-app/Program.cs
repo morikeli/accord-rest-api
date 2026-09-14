@@ -1,4 +1,5 @@
 using AccordIntakeApi.Repository;
+using AccordIntakeApi.Services;
 
 // ASP.NET Core entry point for the ACORD XML intake app.
 // This project exposes the same endpoints through a controller-based setup to match the
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<PostgresIntakeRepository>();
+builder.Services.AddSingleton<AcordXmlIntakeService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
