@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS aps_incoming (
     policy_number TEXT NOT NULL,
     
     -- Patient Details
-    patient_first_name TEXT NOT NULL,
-    patient_last_name TEXT NOT NULL,
+    patient_first_name VARCHAR(150) NOT NULL,
+    patient_last_name VARCHAR(150) NOT NULL,
     patient_date_of_birth DATE NOT NULL,
     patient_government_id VARCHAR(50) NOT NULL,
     patient_street TEXT NOT NULL,
@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS aps_incoming (
     patient_email TEXT, -- Nullable if optional
     
     -- Doctor Details
-    doctor_first_name TEXT NOT NULL,
-    doctor_last_name TEXT NOT NULL,
+    doctor_first_name VARCHAR(150) NOT NULL,
+    doctor_last_name VARCHAR(150) NOT NULL,
     doctor_facility TEXT NOT NULL,
     doctor_street TEXT NOT NULL,
     doctor_city TEXT NOT NULL,
