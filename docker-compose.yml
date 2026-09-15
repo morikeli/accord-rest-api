@@ -28,6 +28,7 @@ services:
   dotnet:
     build:
       context: ./dotnet-app
+      dockerfile: Dockerfile
     container_name: accord_dotnet_api
     environment:
       # Use the shared Postgres service name instead of localhost within Docker.
