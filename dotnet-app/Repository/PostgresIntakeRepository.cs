@@ -107,7 +107,7 @@ public sealed class PostgresIntakeRepository
         PolicyNumber = reader.GetString(reader.GetOrdinal("policy_number")),
         PatientFirstName = reader.GetString(reader.GetOrdinal("patient_first_name")),
         PatientLastName = reader.GetString(reader.GetOrdinal("patient_last_name")),
-        PatientDateOfBirth = reader.GetString(reader.GetOrdinal("patient_date_of_birth")),
+        PatientDateOfBirth = reader.GetFieldValue<DateOnly>(reader.GetOrdinal("patient_date_of_birth")),
         PatientGovernmentId = reader.GetString(reader.GetOrdinal("patient_government_id")),
         PatientStreet = reader.GetString(reader.GetOrdinal("patient_street")),
         PatientCity = reader.GetString(reader.GetOrdinal("patient_city")),
