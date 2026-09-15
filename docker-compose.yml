@@ -42,6 +42,31 @@ services:
       # Map host port 5173 to the app's internal port 8080.
       - "5173:8080"
 
+  # Django API service for JSON intake endpoints and admin app.
+  django:
+    build:
+      context: ./django-app
+      dockerfile: Dockerfile
+    container_name: accord_django_api
+    working_dir: /app
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      # Django connects to the db via the Compose service name postgres.
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      # Don't buffer stdout/stderr; send output immediately!
+      PYTHONUNBUFFERED: "1"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: [ "uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+    ports:
+      # Expose Django on host port 8000.
+      - "8001:8000"
+
 volumes:
   # Named volume for database persistence across container recreation.
   acord-postgres-data:
