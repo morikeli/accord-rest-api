@@ -1,2 +1,16 @@
 @AccordIntakeApi_HostAddress = http://localhost:5173
 
+GET {{AccordIntakeApi_HostAddress}}/health
+Accept: application/json
+
+###
+
+POST {{AccordIntakeApi_HostAddress}}/intake/xml
+Content-Type: application/xml
+
+< ./payloads/OrderRequest.xml
+
+###
+
+GET {{AccordIntakeApi_HostAddress}}/intake/records
+Accept: application/json
