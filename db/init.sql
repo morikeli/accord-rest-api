@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS aps_incoming (
     tracking_id TEXT NOT NULL,
     trans_ref_guid TEXT NOT NULL,
     policy_number TEXT NOT NULL,
+    
+    -- Patient Details
     patient_first_name TEXT NOT NULL,
     patient_last_name TEXT NOT NULL,
     patient_date_of_birth DATE NOT NULL,
