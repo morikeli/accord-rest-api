@@ -13,9 +13,6 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Create the shared database table on startup so the app can persist intake records.
-app.Services.GetRequiredService<PostgresIntakeRepository>().Initialize();
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
