@@ -15,47 +15,6 @@ public sealed class PostgresIntakeRepository
             ?? "Host=localhost;Port=5433;Database=acord;Username=acord;Password=acord_dev_password";
     }
 
-    // Ensures the shared PostgreSQL table exists before any XML record is inserted.
-    public void Initialize()
-    {
-        using var connection = OpenConnection();
-        using var command = connection.CreateCommand();
-        command.CommandText = """
-            CREATE TABLE IF NOT EXISTS aps_incoming (
-                id BIGSERIAL PRIMARY KEY,
-                tracking_id TEXT NOT NULL,
-                trans_ref_guid TEXT NOT NULL,
-                policy_number TEXT NOT NULL,
-                patient_first_name TEXT NOT NULL,
-                patient_last_name TEXT NOT NULL,
-                patient_date_of_birth TEXT NOT NULL,
-                patient_government_id TEXT NOT NULL,
-                patient_street TEXT NOT NULL,
-                patient_city TEXT NOT NULL,
-                patient_state TEXT NOT NULL,
-                patient_zip TEXT NOT NULL,
-                patient_phone TEXT NOT NULL,
-                patient_email TEXT NOT NULL,
-                doctor_first_name TEXT NOT NULL,
-                doctor_last_name TEXT NOT NULL,
-                doctor_facility TEXT NOT NULL,
-                doctor_street TEXT NOT NULL,
-                doctor_city TEXT NOT NULL,
-                doctor_state TEXT NOT NULL,
-                doctor_zip TEXT NOT NULL,
-                doctor_phone TEXT NOT NULL,
-                copy_instructions TEXT NOT NULL,
-                policy_amount NUMERIC(18, 2) NOT NULL,
-                error_message TEXT NOT NULL,
-                is_error BOOLEAN NOT NULL,
-                source TEXT NOT NULL,
-                created_at TIMESTAMPTZ NOT NULL,
-                updated_at TIMESTAMPTZ NOT NULL
-            );
-            """;
-        command.ExecuteNonQuery();
-    }
-
     // Inserts one normalized intake row and returns the generated database id so the caller can
     // inspect or trace the persisted record after the XML is processed.
     public async Task<long> InsertAsync(ApsIncomingEntity entity, CancellationToken cancellationToken)
