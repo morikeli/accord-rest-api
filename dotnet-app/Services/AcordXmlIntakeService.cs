@@ -114,7 +114,7 @@ public sealed class AcordXmlIntakeService(PostgresIntakeRepository repository)
         PolicyNumber = workOrder.PolicyNumber,
         PatientFirstName = workOrder.InsuredFirstName,
         PatientLastName = workOrder.InsuredLastName,
-        PatientDateOfBirth = workOrder.InsuredBirthDate,
+        PatientDateOfBirth = DateValue(workOrder.InsuredBirthDate, "insured BirthDate"),
         PatientGovernmentId = workOrder.InsuredGovernmentId,
         PatientStreet = workOrder.InsuredStreet,
         PatientCity = workOrder.InsuredCity,
@@ -157,4 +157,10 @@ public sealed class AcordXmlIntakeService(PostgresIntakeRepository repository)
     private static string Attribute(XElement? element, string name) => element?.Attribute(name)?.Value.Trim() ?? string.Empty;
 
     private static decimal DecimalValue(string value) => decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var result) ? result : 0;
+
+    private static DateOnly DateValue(string value, string fieldName)
+    {
+        if (DateOnly.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result)) return result;
+        throw new FormatException($"The XML field '{fieldName}' must contain a valid date in ISO format (yyyy-MM-dd).");
+    }
 }
