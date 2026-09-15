@@ -1,28 +1,36 @@
 services:
+  # Shared PostgreSQL database used by both the .NET API and Django app.
   postgres:
     image: postgres:16-alpine
     container_name: accord_postgres_db
     restart: unless-stopped
     environment:
+      # Database name, user, and password come from the root .env file.
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
+      # Expose PostgreSQL on host port 5434 to avoid conflicts with local Postgres.
       - "5434:5432"
     volumes:
+      # Persist database files in a Docker volume so data survives container restarts.
       - acord-postgres-data:/var/lib/postgresql/data
+      # Run the init SQL once when the database is first created.
       - ./db/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
     healthcheck:
+      # Wait until PostgreSQL is ready before starting dependent services.
       test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
       interval: 5s
       timeout: 5s
       retries: 10
 
+  # .NET API service for ACORD XML intake endpoints.
   dotnet:
     build:
       context: ./dotnet-app
     container_name: accord_dotnet_api
     environment:
+      # Use the shared Postgres service name instead of localhost within Docker.
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__SharedDatabase: Host=postgres;Port=5432;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
@@ -30,7 +38,9 @@ services:
       postgres:
         condition: service_healthy
     ports:
+      # Map host port 5173 to the app's internal port 8080.
       - "5173:8080"
 
 volumes:
+  # Named volume for database persistence across container recreation.
   acord-postgres-data:
