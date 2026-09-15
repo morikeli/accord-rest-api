@@ -63,7 +63,7 @@ public sealed class ApsIncomingEntity
     public string PolicyNumber { get; set; } = string.Empty;
     public string PatientFirstName { get; set; } = string.Empty;
     public string PatientLastName { get; set; } = string.Empty;
-    public string PatientDateOfBirth { get; set; } = string.Empty;
+    public DateOnly PatientDateOfBirth { get; set; }
     public string PatientGovernmentId { get; set; } = string.Empty;
     public string PatientStreet { get; set; } = string.Empty;
     public string PatientCity { get; set; } = string.Empty;
