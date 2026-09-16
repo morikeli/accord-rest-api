@@ -7,6 +7,35 @@ class HealthCheckSerializer(serializers.Serializer):
     message = serializers.CharField()
 
 
+class SignupSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, min_length=8)
+    confirm_password = serializers.CharField(write_only=True, min_length=8)
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "password",
+            "confirm_password",
+        ]
+
+    def validate(self, attrs):
+        if attrs["password"] != attrs["password_confirm"]:
+            raise serializers.ValidationError({
+                "password": "Passwords do not match!"
+            })
+
+        validate_password(attrs["password"])
+
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop("password_confirm")
+
+        return User.objects.create_user(**validated_data)
+
+
 class AcordJSONIntakeSerializer(serializers.ModelSerializer):
     source = serializers.CharField(read_only=True)
 
