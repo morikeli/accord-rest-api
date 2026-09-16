@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "apps.acord_intake",
+    "acord_intake",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
