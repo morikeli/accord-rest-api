@@ -19,6 +19,14 @@ class HealthCheckView(GenericAPIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
+@extend_schema(tags=["Auth"], summary="Create a user account")
+class SignupView(CreateAPIView):
+    """Create an active user account."""
+
+    permission_classes = [permissions.AllowAny]
+    serializer_class = SignupSerializer
+
+
 @extend_schema(tags=["Intake"], summary="Parse APS JSON response")
 class IntakeAPIView(CreateAPIView):
     """
