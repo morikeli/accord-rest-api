@@ -168,3 +168,22 @@ MAILERS = {
 CORS_ALLOWED_ORIGINS = [
     "https://127.0.0.1:8000",
 ]
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "ACORD REST API",
+    "DESCRIPTION": "Secure API for ACORD APS intake, record management, and JWT authentication.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "TAGS": [
+        {
+            "name": "/",
+        },
+    ],
+    'SWAGGER_UI_SETTINGS': {
+        'tagsSorter': 'alpha',
+    },
+    
+    # "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    # "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    # "REDOC_DIST": "SIDECAR",
+}
