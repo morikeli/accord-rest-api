@@ -8,6 +8,8 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path("api/", include("acord_intake.urls")),
+    path("api/auth/token", DecoratedTokenObtainView.as_view(), name="token_obtain_pair"),
+    path("api/auth/token/refresh", DecoratedTokenRefreshView.as_view(), name="token_refresh"),
     path("admin/", admin.site.urls),
 
     # Schema generator
