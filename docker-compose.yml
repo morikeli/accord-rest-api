@@ -62,6 +62,12 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      # Mount local host source code into container for live hot-reloading
+      - ./django-app:/app
+      # Anonymous volume prevents host .venv from overwriting container .venv
+      - /app/.venv
+  
     command: [ "uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
     ports:
       # Expose Django on host port 8000.
