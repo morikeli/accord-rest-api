@@ -92,6 +92,11 @@ public sealed class AcordXmlIntakeService(PostgresIntakeRepository repository)
         return new IntakeResult(workOrder, entity, validationErrors);
     }
 
+    public IReadOnlyList<ApsIncomingEntity> GetAllRecords()
+    {
+        return repository.GetAll();
+    }
+
     // Keeps the required checks aligned to the fields that matter in the sample XML.
     // Missing transaction metadata or required insured information is treated as a validation error.
     private static List<string> Validate(IntakeWorkOrder workOrder)
