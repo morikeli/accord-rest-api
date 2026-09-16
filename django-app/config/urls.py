@@ -1,10 +1,22 @@
 from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.utils import extend_schema
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+
+# Wrap SimpleJWT views with custom schema metadata
+DecoratedTokenObtainView = extend_schema(
+    tags=["Auth"], summary="Generate JWT access and refresh tokens"
+)(TokenObtainPairView)
+
+DecoratedTokenRefreshView = extend_schema(
+    tags=["Auth"], summary="Refresh JWT access token"
+)(TokenRefreshView)
 
 urlpatterns = [
     path("api/", include("acord_intake.urls")),
