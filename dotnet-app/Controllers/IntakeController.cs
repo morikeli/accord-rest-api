@@ -1,3 +1,4 @@
+using AccordIntakeApi.Dtos;
 using AccordIntakeApi.Repository;
 using AccordIntakeApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,6 @@ public sealed class IntakeController(AcordXmlIntakeService intakeService, Postgr
     [HttpGet("/intake/records")]
     public IActionResult GetRecords()
     {
-        return Ok(repository.GetAll());
+        return Ok(intakeService.GetAllRecords());
     }
 }
