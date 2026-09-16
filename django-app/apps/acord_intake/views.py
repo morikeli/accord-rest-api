@@ -33,3 +33,30 @@ class IntakeAPIView(CreateAPIView):
     def perform_create(self, serializer):
         """Save the validated intake record and identify its source as JSON."""
         serializer.save(source="json")
+
+
+@extend_schema_view(
+    list=extend_schema(summary="Retrieve and list all APS records"),
+    retrieve=extend_schema(summary="Retrieve a single APS record"),
+    update=extend_schema(summary="Update an APS record"),
+    destroy=extend_schema(summary="Delete an APS record"),
+)
+@extend_schema(tags=["APS"])
+class APSRecordsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for listing, retrieving, updating, and deleting APS records.
+    """
+
+    queryset = ApsIncoming.objects.all().order_by("-created_at")
+    serializer_class = AcordJSONIntakeSerializer
+    pagination_class = StandardResultsSetPagination
+    http_method_names = ["get", "put", "delete", "head", "options"]
+
+    def get_object(self):
+        # Let the ViewSet look up the record using the URL's primary-key value.
+        try:
+            return super().get_object()
+        except Http404:
+            # Convert Django's lookup exception into a DRF 404 response with a
+            # clearer message for API clients.
+            raise exceptions.NotFound("The requested record could not be found!")
