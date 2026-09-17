@@ -1,12 +1,11 @@
 using AccordIntakeApi.Dtos;
-using AccordIntakeApi.Repository;
 using AccordIntakeApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccordIntakeApi.Controllers;
 
 [ApiController]
-public sealed class IntakeController(AcordXmlIntakeService intakeService, PostgresIntakeRepository repository) : ControllerBase
+public sealed class IntakeController(AcordXmlIntakeService intakeService) : ControllerBase
 {
     // Dependency Injection also works with this commented code
 
