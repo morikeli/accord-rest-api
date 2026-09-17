@@ -3,7 +3,7 @@
 ## Overview
 This repository contains a two-service backend for processing and managing ACORD-based intake data. It combines a .NET API for XML intake and persistence with a Django REST API for authentication, schema documentation, and admin-facing endpoints, all backed by a shared PostgreSQL database.
 
-The project is designed for teams working with insurance and financial data interchange, where ACORD XML payloads need to be validated, stored, retrieved, and managed through a modern API stack.
+The project is designed for teams working with insurance, where ACORD XML payloads need to be validated, stored, retrieved, and managed through a modern API stack.
 
 ### Key features
 - 🔐 **JWT-based authentication** via Django REST Framework and SimpleJWT
@@ -176,5 +176,4 @@ If this project helps your workflow, consider giving the repo a star and sharing
 
 ## 🐞 Known issues
 1. Local environment values must be set correctly in `.env` before running the Django app.
-2. Some service endpoints may vary slightly depending on whether you run the apps through Docker or directly on your machine.
-3. The current setup is intended for development workflows and not hardened for production deployment.
+2. The current setup is intended for development workflows and not hardened for production deployment.
