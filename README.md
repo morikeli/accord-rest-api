@@ -108,6 +108,23 @@ docker compose down -v   # removes database volumes too
 - Django Swagger docs: `http://localhost:8001/api/docs/`
 - Django admin: `http://localhost:8001/admin/`
 
+#### Test the .NET XML intake endpoint with cURL
+Use the sample ACORD XML payload in `payloads/OrderRequest.xml` to send a request to the .NET API:
+
+```bash
+curl -X POST "http://localhost:5173/intake/xml" \
+  -H "Content-Type: application/xml" \
+  --data-binary @payloads/OrderRequest.xml
+```
+
+This sends the XML payload directly to the intake endpoint for processing.
+
+#### Test Django API endpoints
+The Django app will be available at:
+- `http://localhost:8001`
+
+API documentation:
+- `http://localhost:8001/api/docs/` 
 ---
 
 #### Database setup
