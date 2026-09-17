@@ -49,7 +49,7 @@ class APSRecordsViewSet(viewsets.ModelViewSet):
     queryset = ApsIncoming.objects.all().order_by("-created_at")
     serializer_class = AcordJSONIntakeSerializer
     pagination_class = StandardResultsSetPagination
-    http_method_names = ["get", "put", "delete", "head", "options"]
+    http_method_names = ["get", "post", "put", "delete", "head", "options"]
 
     def get_object(self):
         # Let the ViewSet look up the record using the URL's primary-key value.
