@@ -59,3 +59,7 @@ class APSRecordsViewSet(viewsets.ModelViewSet):
             # Convert Django's lookup exception into a DRF 404 response with a
             # clearer message for API clients.
             raise exceptions.NotFound("The requested record could not be found!")
+
+    def perform_create(self, serializer):
+        """Save the validated intake record and identify its source as JSON."""
+        return serializer.save(source="json")
