@@ -44,6 +44,7 @@ class AcordJSONIntakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApsIncoming
         fields = '__all__'
+        read_only_fields = ["id", "source", "created_at", "updated_at"]
 
     def to_internal_value(self, data):
         field_aliases = {
