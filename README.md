@@ -104,6 +104,7 @@ docker compose down -v   # removes database volumes too
 #### Service endpoints
 - .NET health check: `http://localhost:5173/health`
 - .NET XML intake endpoint: `http://localhost:5173/intake/xml`
+- Django API health check: `http://localhost:8001/api/health`
 - Django Swagger docs: `http://localhost:8001/api/docs/`
 - Django admin: `http://localhost:8001/admin/`
 
