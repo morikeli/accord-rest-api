@@ -133,6 +133,33 @@ The project uses PostgreSQL and includes a startup SQL file at:
 
 When running via Docker Compose, the database is created automatically from the environment variables in `.env`.
 
+#### View the PostgreSQL database inside Docker
+If the stack is running with Docker Compose, you can connect directly to the PostgreSQL container and inspect the data:
+
+```bash
+docker exec -it accord_postgres_db psql -U postgres -d accord
+```
+
+Once inside PostgreSQL, you can list tables and query data:
+1. List tables
+```sql
+\dt
+```
+
+2. Query data from `aps_incoming` table
+```sql
+SELECT * FROM aps_incoming LIMIT 10;
+```
+
+If you want to inspect the database from your host machine instead, you can connect using a local PostgreSQL client with these values:
+- Host: `localhost`
+- Port: `5434`
+- Database: the value in `DB_NAME`
+- User: the value in `DB_USER`
+- Password: the value in `DB_PASSWORD`
+
+You can also use a GUI tool such as pgAdmin or DBeaver to connect to the running database container.
+
 ---
 
 ## 🤝 Contributor expectations
