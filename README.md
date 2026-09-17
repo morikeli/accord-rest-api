@@ -171,9 +171,6 @@ If you want to contribute to the project:
 
 Please keep environment configuration in `.env` and do not commit production secrets.
 
-## 🙏 Request
-If this project helps your workflow, consider giving the repo a star and sharing useful feedback.
-
 ## 🐞 Known issues
 1. Local environment values must be set correctly in `.env` before running the Django app.
 2. The current setup is intended for development workflows and not hardened for production deployment.
