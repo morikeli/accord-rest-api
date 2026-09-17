@@ -23,13 +23,9 @@ class SignupSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, attrs):
-        if attrs["password"] != attrs["password_confirm"]:
-            raise serializers.ValidationError({
-                "password": "Passwords do not match!"
-            })
-
+        if attrs["password"] != attrs["confirm_password"]:
+            raise serializers.ValidationError({"password": "Passwords do not match!"})
         validate_password(attrs["password"])
-
         return attrs
 
     def create(self, validated_data):
