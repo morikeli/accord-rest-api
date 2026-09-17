@@ -42,15 +42,9 @@ This structure keeps the solution easier to evolve, easier to test, and easier t
 > [!WARNING]
 > The recommended way to run this project is with Docker Compose. If you use Docker Compose only, you do not need to install .NET, Python, or uv on your machine.
 >
-> Required for Docker-based setup:
-> - Docker Desktop or Docker Engine + Compose
+> Requirements for Docker-based setup:
+> - Docker Desktop(or Docker Engine or Docker Desktop CLI) + Compose
 >
-> Optional for direct local development:
-> - .NET 10 SDK
-> - Python 3.14
-> - uv package manager
-> - A code editor such as VS Code
-
 ---
 
 #### Prerequisites
@@ -111,48 +105,6 @@ docker compose down -v   # removes database volumes too
 - .NET XML intake endpoint: `http://localhost:5173/intake/xml`
 - Django Swagger docs: `http://localhost:8001/api/docs/`
 - Django admin: `http://localhost:8001/admin/`
-
----
-
-#### Run the .NET app locally (optional)
-
-Only needed if you want to run the .NET service without Docker.
-
-```bash
-cd dotnet-app
-dotnet restore
-dotnet run
-```
-
-The app listens on the default ASP.NET Core development port, typically:
-- `http://localhost:5000` or `https://localhost:5001`
-
-If you want to use the same environment variables as the project, make sure your application settings or `appsettings.Development.json` are configured correctly.
-
----
-
-#### Run the Django app locally (optional)
-
-Only needed if you want to run the Django service without Docker.
-
-```bash
-cd django-app
-uv sync
-uv run python manage.py migrate
-uv run python manage.py runserver 0.0.0.0:8000
-```
-
-The Django app will be available at:
-- `http://localhost:8000`
-
-API documentation:
-- `http://localhost:8000/api/docs/`
-
-If you are running PostgreSQL locally instead of via Docker, set:
-```env
-DB_HOST=localhost
-DB_PORT=5434
-```
 
 ---
 
