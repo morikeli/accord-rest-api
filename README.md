@@ -24,6 +24,7 @@ The project is designed for teams working with insurance and financial data inte
 - Npgsql
 
 #### Django packages
+- djangorestframework
 - drf-spectacular
 - django-cors-headers
 - django-environ
