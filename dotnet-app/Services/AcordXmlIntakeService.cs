@@ -97,6 +97,19 @@ public sealed class AcordXmlIntakeService(PostgresIntakeRepository repository)
         return repository.GetAll();
     }
 
+    public Task<bool> UpdateRecordAsync(
+        long id,
+        ApsIncomingEntity entity,
+        CancellationToken cancellationToken)
+    {
+        return repository.UpdateAsync(id, entity, cancellationToken);
+    }
+
+    public Task<bool> DeleteRecordAsync(long id, CancellationToken cancellationToken)
+    {
+        return repository.DeleteAsync(id, cancellationToken);
+    }
+
     // Keeps the required checks aligned to the fields that matter in the sample XML.
     // Missing transaction metadata or required insured information is treated as a validation error.
     private static List<string> Validate(IntakeWorkOrder workOrder)
