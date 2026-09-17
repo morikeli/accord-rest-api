@@ -33,22 +33,9 @@ class SignupView(CreateAPIView):
     serializer_class = SignupSerializer
 
 
-@extend_schema(tags=["Intake"], summary="Parse APS JSON response")
-class IntakeAPIView(CreateAPIView):
-    """
-    API endpoint for handling intake of APS records.
-    """
-
-    serializer_class = AcordJSONIntakeSerializer
-
-    @extend_schema(responses={201: AcordJSONIntakeSerializer})
-    def perform_create(self, serializer):
-        """Save the validated intake record and identify its source as JSON."""
-        serializer.save(source="json")
-
-
 @extend_schema_view(
     list=extend_schema(summary="Retrieve and list all APS records"),
+    create=extend_schema(summary="Create an APS record"),
     retrieve=extend_schema(summary="Retrieve a single APS record"),
     update=extend_schema(summary="Update an APS record"),
     destroy=extend_schema(summary="Delete an APS record"),
