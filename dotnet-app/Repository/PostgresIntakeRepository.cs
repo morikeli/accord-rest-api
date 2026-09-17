@@ -53,6 +53,54 @@ public sealed class PostgresIntakeRepository
         return records;
     }
 
+    public async Task<bool> UpdateAsync(long id, ApsIncomingEntity entity, CancellationToken cancellationToken)
+    {
+        await using var connection = await OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = """
+            UPDATE aps_incoming SET
+                tracking_id = @tracking_id,
+                trans_ref_guid = @trans_ref_guid,
+                policy_number = @policy_number,
+                patient_first_name = @patient_first_name,
+                patient_last_name = @patient_last_name,
+                patient_date_of_birth = @patient_date_of_birth,
+                patient_government_id = @patient_government_id,
+                patient_street = @patient_street,
+                patient_city = @patient_city,
+                patient_state = @patient_state,
+                patient_zip = @patient_zip,
+                patient_phone = @patient_phone,
+                patient_email = @patient_email,
+                doctor_first_name = @doctor_first_name,
+                doctor_last_name = @doctor_last_name,
+                doctor_facility = @doctor_facility,
+                doctor_street = @doctor_street,
+                doctor_city = @doctor_city,
+                doctor_state = @doctor_state,
+                doctor_zip = @doctor_zip,
+                doctor_phone = @doctor_phone,
+                copy_instructions = @copy_instructions,
+                policy_amount = @policy_amount,
+                error_message = @error_message,
+                is_error = @is_error,
+                updated_at = NOW()
+            WHERE id = @id;
+            """;
+        command.Parameters.AddWithValue("id", id);
+        AddParameters(command, entity);
+        return await command.ExecuteNonQueryAsync(cancellationToken) > 0;
+    }
+
+    public async Task<bool> DeleteAsync(long id, CancellationToken cancellationToken)
+    {
+        await using var connection = await OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM aps_incoming WHERE id = @id";
+        command.Parameters.AddWithValue("id", id);
+        return await command.ExecuteNonQueryAsync(cancellationToken) > 0;
+    }
+
     private NpgsqlConnection OpenConnection()
     {
         var connection = new NpgsqlConnection(_connectionString);
