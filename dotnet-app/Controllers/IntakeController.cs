@@ -51,4 +51,21 @@ public sealed class IntakeController(AcordXmlIntakeService intakeService) : Cont
     {
         return Ok(intakeService.GetAllRecords());
     }
+    
+    [HttpPut("/intake/records/{id:long}")]
+    public async Task<IActionResult> UpdateRecord(
+        long id,
+        ApsIncomingEntity entity,
+        CancellationToken cancellationToken)
+    {
+        var updated = await intakeService.UpdateRecordAsync(id, entity, cancellationToken);
+        return updated ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("/intake/records/{id:long}")]
+    public async Task<IActionResult> DeleteRecord(long id, CancellationToken cancellationToken)
+    {
+        var deleted = await intakeService.DeleteRecordAsync(id, cancellationToken);
+        return deleted ? NoContent() : NotFound();
+    }
 }
