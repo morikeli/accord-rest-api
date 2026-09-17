@@ -8,7 +8,7 @@ The project is designed for teams working with insurance and financial data inte
 ### Key features
 - 🔐 **JWT-based authentication** via Django REST Framework and SimpleJWT
 - 📄 **ACORD XML intake processing** in the .NET service
-- 💾 **PostgreSQL persistence** for stored records and XML workflows
+- 💾 **PostgreSQL persistence** for stored records
 - 🧾 **Schema and API documentation** through DRF Spectacular (Swagger and Redoc)
 - 🧩 **Modular multi-service architecture** with separate .NET and Django services
 - 🐳 **Dockerized local development** using Docker Compose
