@@ -41,7 +41,6 @@ docker compose up --build
 ## Testing .NET app
 
 ```bash
-dotnet run --project AccordIntakeApi/AccordIntakeApi.csproj
 curl -X POST http://localhost:5173/intake/xml \
   -H 'Content-Type: application/xml' \
   --data-binary @payloads/OrderRequest.xml
@@ -55,9 +54,6 @@ The sample is an original request, so the expected validation error list is empt
 `django-app/` contains a small Django app with `POST /intake/json`. It accepts the flattened equivalent of the XML sample in `payloads/sample.json`. Its unmanaged `ApsIncoming` model points to the same `aps_incoming` table and SQLite file. Install and run it with:
 
 ```bash
-python3 -m pip install -r DjangoIntake/requirements.txt
-python3 DjangoIntake/manage.py check
-python3 DjangoIntake/manage.py runserver 8000
 curl -X POST http://127.0.0.1:8001/api/aps \
   -H 'Content-Type: application/json' \
   --data-binary @payloads/OrderRequest.json
