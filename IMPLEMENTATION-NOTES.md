@@ -51,7 +51,7 @@ The sample is an original request, so the expected validation error list is empt
 
 ## Django JSON companion
 
-`django-app/` contains a small Django app with `POST /intake/json`. It accepts the flattened equivalent of the XML sample in `payloads/sample.json`. Its unmanaged `ApsIncoming` model points to the same `aps_incoming` table and SQLite file. Install and run it with:
+`django-app/` contains a small Django app with `POST /api/aps`. It accepts the flattened equivalent of the XML sample in `payloads/OrderRequest.json`. Its unmanaged `ApsIncoming` model points to the same `aps_incoming` table. Start the Docker container using docker compose and submit a POST request using Postman or curl.
 
 ```bash
 curl -X POST http://127.0.0.1:8001/api/aps \
