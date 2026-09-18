@@ -32,11 +32,10 @@ The ZIP remains unchanged. This application is an adapted runnable host for the 
 
 PostgreSQL runs in the `acord-postgres` Docker container. This workspace maps container port 5432 to host port 5433 because host port 5432 was already occupied. Both apps connect to database `acord` on `localhost:5433`, using the development credentials in the local configuration. The table is `aps_incoming`; Docker creates it from `database/init.sql`, and the .NET startup check also creates it if it is missing. The Django model uses `managed = False` so Django does not attempt to recreate the table.
 
-Start PostgreSQL from the workspace root:
+Start PostgreSQL, and backend services from the workspace root:
 
 ```bash
-docker compose up -d postgres
-docker compose ps
+docker compose up --build
 ```
 
 ## Running the .NET path
