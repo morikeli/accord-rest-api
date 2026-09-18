@@ -38,7 +38,7 @@ Start PostgreSQL, and backend services from the workspace root:
 docker compose up --build
 ```
 
-## Running the .NET path
+## Testing .NET app
 
 ```bash
 dotnet run --project AccordIntakeApi/AccordIntakeApi.csproj
