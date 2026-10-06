@@ -53,6 +53,8 @@ This structure keeps the solution easier to evolve, easier to test, and easier t
 1. Install Docker
 - Download and install Docker Desktop for your OS:
   - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- If Docker Desktop can't be installed you can install Docker Engine for your OS:
+  - [Docker Engine](https://docs.docker.com/engine/install/) 
 - Ensure Docker is running before starting the app.
 
 2. Create the environment file
